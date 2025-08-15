@@ -17,8 +17,17 @@ export default {
       const start = input.selectionStart
       const oldLength = input.value.length
       const raw = input.value.replace(/,/g, '')
-      const val = raw ? Number(raw) : 0
-      input.value = raw ? format(val) : ''
+      const [intPart = '', decPart] = raw.split('.')
+      let formattedInt = ''
+      if (intPart || intPart === '0') {
+        const number = Number(intPart)
+        if (!isNaN(number)) {
+          formattedInt = number.toLocaleString('en-US')
+        }
+      } else if (raw.startsWith('.')) {
+        formattedInt = '0'
+      }
+      input.value = decPart !== undefined ? `${formattedInt}.${decPart}` : formattedInt
       vnode.componentInstance.$emit('input', raw)
       const newLength = input.value.length
       const diff = newLength - oldLength
