@@ -75,6 +75,7 @@
                     >
                     <v-list-item-content class="align-end text-right">
                       <v-text-field
+                        v-currency
                         :readonly="!editar"
                         style="max-width: 100%"
                         dense
@@ -83,7 +84,7 @@
                         prepend-inner-icon="mdi-currency-usd"
                         align="right"
                         required
-                        type="number"
+                        type="text"
                         :min="0"
                         v-model="efectivo"
                         @keypress="validarNumero"
@@ -100,6 +101,7 @@
                       style="width: 100px"
                     >
                       <v-text-field
+                        v-currency
                         :readonly="!editar"
                         style="max-width: 100%"
                         dense
@@ -108,7 +110,7 @@
                         prepend-inner-icon="mdi-currency-usd"
                         align="right"
                         required
-                        type="number"
+                        type="text"
                         :min="0"
                         v-model="bancos"
                         @keypress="validarNumero"
@@ -140,6 +142,7 @@
                     >
                     <v-list-item-content class="align-end text-right">
                       <v-text-field
+                        v-currency
                         :readonly="!editar"
                         style="max-width: 100%"
                         dense
@@ -148,7 +151,7 @@
                         prepend-inner-icon="mdi-currency-usd"
                         align="right"
                         required
-                        type="number"
+                        type="text"
                         :min="0"
                         v-model="deudaxc"
                         @keypress="validarNumero"
@@ -169,6 +172,7 @@
                     >
                     <v-list-item-content class="align-end text-right">
                       <v-text-field
+                        v-currency
                         :readonly="!editar"
                         style="max-width: 100%"
                         dense
@@ -177,7 +181,7 @@
                         prepend-inner-icon="mdi-currency-usd"
                         align="right"
                         required
-                        type="number"
+                        type="text"
                         :min="0"
                         v-model="activofijo"
                         @keypress="validarNumero"
@@ -240,6 +244,7 @@
                     >
                     <v-list-item-content class="align-end text-right">
                       <v-text-field
+                        v-currency
                         :readonly="!editar"
                         style="max-width: 100%"
                         dense
@@ -248,7 +253,7 @@
                         prepend-inner-icon="mdi-currency-usd"
                         align="right"
                         required
-                        type="number"
+                        type="text"
                         :min="0"
                         v-model="deudaxp"
                         @keypress="validarNumero"

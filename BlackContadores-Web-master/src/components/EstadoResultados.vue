@@ -121,7 +121,7 @@
               </v-menu>
             </v-col>
             <v-col cols="12" sm="3">
-              <v-select
+              <v-autocomplete
                 class="mx-3"
                 :value="clasificacionID"
                 ref="clasificaciones"
@@ -134,10 +134,10 @@
                 item-key="itemsClasificacion"
                 return-object
                 @change="clasificacionSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="12" sm="3">
-              <v-select
+              <v-autocomplete
                 v-model="subclasificacionID"
                 class="mx-3"
                 :value="subclasificacionID"
@@ -151,7 +151,7 @@
                 item-key="itemsSubClasificacion"
                 return-object
                 @change="subclasificacionSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="12" sm="2">
               <v-btn

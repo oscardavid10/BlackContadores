@@ -100,7 +100,7 @@
                               ></v-text-field>
                             </v-col>
                             <v-col cols="12" sm="4">
-                              <v-select
+                              <v-autocomplete
                                 :value="anio"
                                 v-model="anio"
                                 ref="anio"
@@ -109,10 +109,10 @@
                                 :items="anios"
                                 @input="setSelected"
                                 :readonly="CapitalFinal > 0 || !editar"
-                              ></v-select>
+                              ></v-autocomplete>
                             </v-col>
                             <v-col cols="12" sm="4">
-                              <v-select
+                              <v-autocomplete
                                 :disabled="!editar"
                                 :value="GiroID"
                                 prepend-icon="mdi-map"
@@ -123,10 +123,10 @@
                                 item-key="itemsGiros"
                                 return-object
                                 @change="giroSeleccionado"
-                              ></v-select>
+                              ></v-autocomplete>
                             </v-col>
                             <v-col cols="12" sm="4">
-                              <v-select
+                              <v-autocomplete
                                 :disabled="!editar"
                                 :value="SubGiroID"
                                 prepend-icon="mdi-map"
@@ -137,10 +137,10 @@
                                 item-key="itemsSubGiros"
                                 return-object
                                 @change="subGiroSeleccionado"
-                              ></v-select>
+                              ></v-autocomplete>
                             </v-col>
                             <v-col cols="12" sm="4">
-                              <v-select
+                              <v-autocomplete
                                 :disabled="!editar"
                                 :value="ActividadID"
                                 prepend-icon="mdi-map"
@@ -151,7 +151,7 @@
                                 item-key="itemsActividades"
                                 return-object
                                 @change="actividadSeleccionado"
-                              ></v-select>
+                              ></v-autocomplete>
                             </v-col>
                             <v-col cols="12" sm="12" v-if="otraActividad">
                               <v-text-field
@@ -310,7 +310,7 @@
                     prepend-icon="mdi-calendar-lock"
                     :value="fechaVencimiento"
                   ></v-text-field>
-                  <h2 class="red--text" v-if="!activa">
+                  <h2 class="red--text" v-if="vencida">
                     Tu Membresia se encuentra vencida, favor de realizar su pago
                   </h2>
                 </v-card-text>
@@ -580,10 +580,30 @@ export default {
         this.actividad = response.data.response.perfil[0].OtraActividad;
         this.otraActividad = response.data.response.perfil[0].OtraActividad;
         this.fechaActivacion = response.data.response.perfil[0].FechaActivacion;
-        this.fechaVencimiento =
-          response.data.response.perfil[0].FechaVencimiento;
+        this.fechaVencimiento = response.data.response.perfil[0].FechaVencimiento; 
+        // puede venir "02/09/2025" o "2025-04-28 13:34:38.173"
 
-        if (Date.now() > new Date(this.fechaVencimiento)) this.vencida = true;
+        // 1) extraer sólo la parte de fecha
+        let datePart;
+        if (this.fechaVencimiento.includes('/')) {
+          // formato DD/MM/YYYY
+          datePart = this.fechaVencimiento;
+        } else {
+          // formato SQL "YYYY-MM-DD hh:mm:ss"
+          datePart = this.fechaVencimiento.split(' ')[0]; // "2025-04-28"
+          // lo convertimos a "28/04/2025" para reutilizar
+          const [yyyy, mm, dd] = datePart.split('-');
+          datePart = `${dd}/${mm}/${yyyy}`;
+        }
+
+        // 2) parsear siempre DD/MM/YYYY en Date
+        const [dd2, mm2, yyyy2] = datePart.split('/');
+        const venc = new Date(Number(yyyy2), Number(mm2) - 1, Number(dd2));
+
+        // 3) marcar vencida si la fecha ya pasó
+        this.vencida = Date.now() > venc.getTime();
+
+        // if (Date.now() > new Date(this.fechaVencimiento)) this.vencida = true;
         //this.fechaProximoPago =
         //response.data.response.perfil[0].FechaProximoPago;
       } else {

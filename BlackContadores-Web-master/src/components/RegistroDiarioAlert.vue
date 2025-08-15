@@ -118,7 +118,7 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="12">
-              <v-select
+              <v-autocomplete
                 :readonly="
                   accion == 3 ||
                   ($props.registroInicial && $props.esCxCInicial) ||
@@ -136,10 +136,10 @@
                 item-key="itemsClasificacion"
                 return-object
                 @change="clasificacionSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="10" sm="10" v-show="clasificacionID !== 4">
-              <v-select
+              <v-autocomplete
                 :readonly="accion == 3 || (accion != 0 && registroInicial)"
                 :v-model="subclasificacionID"
                 :value="subclasificacionID"
@@ -154,7 +154,7 @@
                 item-key="itemsSubClasificacion"
                 return-object
                 @change="subclasificacionSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col
               v-show="clasificacionID !== 4"
@@ -180,7 +180,7 @@
               </v-tooltip>
             </v-col>
             <v-col cols="10" sm="10" xs="10">
-              <v-select
+              <v-autocomplete
                 :readonly="accion == 3 || $props.registroInicial"
                 required
                 outlined
@@ -195,7 +195,7 @@
                 label="Cuenta afectar (*)"
                 @change="cuentaSeleccionada"
                 style="padding-left: 1px"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="2" sm="2" class="p-2 pl-2 pr-2 pt-3">
               <v-tooltip bottom>
@@ -217,7 +217,7 @@
             </v-col>
 
             <v-col v-show="clasificacionID == 5 || clasificacionID == 6" cols="12" sm="12">
-              <v-select
+              <v-autocomplete
                 :readonly="accion == 3 || $props.registroInicial"
                 required
                 outlined
@@ -232,7 +232,7 @@
                 label="Subcuenta afectar (*)"
                 style="padding-left: 1px"
                 @change="subcuentaSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
 
             <v-col v-show="clasificacionID == 4" cols="12" sm="12">
@@ -267,12 +267,14 @@
             <v-col cols="6" sm="6" md="6"></v-col>
             <v-col cols="6" sm="6" md="6">
               <v-text-field
+                v-currency
                 :readonly="accion == 3"
                 align="right"
                 label="Importe (*)"
                 required
                 outlined
                 :min="0"
+                type="text"
                 :value="importe"
                 v-model="importe"
                 @keypress="validarNumero"

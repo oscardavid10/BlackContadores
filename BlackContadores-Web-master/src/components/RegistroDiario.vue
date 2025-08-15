@@ -148,7 +148,7 @@
               </v-menu>
             </v-col>
             <v-col cols="10" sm="2">
-              <v-select
+              <v-autocomplete
                 required
                 outlined
                 :value="cuentaID"
@@ -161,7 +161,7 @@
                 return-object
                 @change="cuentaSeleccionada"
                 style="padding-left: 1px"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="12" sm="2">
               <v-btn

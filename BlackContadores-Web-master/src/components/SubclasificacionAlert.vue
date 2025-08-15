@@ -36,7 +36,7 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="12" justify-right class="justify-right">
-              <v-select
+              <v-autocomplete
                 :value="ClasificacionID"
                 ref="clasificaciones"
                 outlined
@@ -50,7 +50,7 @@
                 return-object
                 :disabled="pagos"
                 @change="clasificacionSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="12" sm="12" justify-right class="justify-right">
               <v-switch

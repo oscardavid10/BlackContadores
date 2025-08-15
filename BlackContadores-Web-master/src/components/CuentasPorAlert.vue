@@ -33,7 +33,7 @@
         <v-container>
           <v-row no-gutters>
             <v-col cols="12" sm="12" md="12">
-              <v-select
+              <v-autocomplete
                 :value="cxcID"
                 ref="collection"
                 outlined
@@ -54,10 +54,10 @@
                 item-key="itemsCollection"
                 return-object
                 @change="collectionSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="12" sm="10">
-              <v-select
+              <v-autocomplete
                 outlined
                 :value="cuentaID"
                 ref="cuentas"
@@ -70,7 +70,7 @@
                 label="Cuenta afectar (*)"
                 @change="cuentaSeleccionada"
                 style="padding-left: 1px"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="12" sm="2" class="py-2 pl-2">
               <v-tooltip bottom>
@@ -91,7 +91,7 @@
               </v-tooltip>
             </v-col>
             <v-col cols="12" sm="10">
-              <v-select
+              <v-autocomplete
                 :value="subclasificacionID"
                 ref="subclasificaciones"
                 outlined
@@ -104,7 +104,7 @@
                 item-key="ItemsSubClasificacion"
                 return-object
                 @change="subclasificacionSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col
               cols="12"
@@ -154,13 +154,14 @@
             <v-col cols="6" sm="6" md="6"></v-col>
             <v-col cols="6" sm="6" md="6">
               <v-text-field
+                v-currency
                 reverse
                 style="text-align: end"
                 align="right"
                 label="Abono (*)"
                 required
                 outlined
-                type="number"
+                type="text"
                 :min="0"
                 :max="saldoMax"
                 v-model="abono"

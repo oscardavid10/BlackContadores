@@ -25,7 +25,7 @@
         <v-container>
           <v-row no-gutters>
             <v-col cols="12" sm="12">
-              <v-select
+              <v-autocomplete
                 v-if="tipoID != 3 && tipoID != 4"
                 :value="tipoID"
                 ref="tipo"
@@ -39,7 +39,7 @@
                 return-object
                 prepend-icon="mdi-format-list-bulleted-type"
                 @change="tipoSeleccionada"
-              ></v-select>
+              ></v-autocomplete>
             </v-col>
             <v-col cols="12" sm="12" md="12">
               <v-text-field
