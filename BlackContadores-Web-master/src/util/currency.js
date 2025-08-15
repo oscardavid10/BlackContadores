@@ -22,7 +22,7 @@ export default {
       vnode.componentInstance.$emit('input', raw)
       const newLength = input.value.length
       const diff = newLength - oldLength
-      const newPos = start  diff
+      const newPos = start + diff
       input.setSelectionRange(newPos, newPos)
     }
 
