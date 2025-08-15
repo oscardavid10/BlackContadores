@@ -38,8 +38,12 @@ export default {
     const onBlur = () => {
       const raw = input.value.replace(/,/g, '')
       if (raw === '') return
-      const val = Number(raw).toFixed(2)
-      input.value = format(val, 2)
+      const val = Number(Number(raw).toFixed(2))
+      const formatted = format(val, 2)
+      vnode.componentInstance.$emit('input', val)
+      vnode.context.$nextTick(() => {
+        input.value = formatted
+      })
       vnode.componentInstance.$emit('input', val)
     }
 
