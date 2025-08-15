@@ -6,11 +6,13 @@ import VueRouter from "vue-router";
 import routes from "./router/routes"
 import "./util/filters"
 import './plugins/base'
+import currency from './util/currency'
 
 // configure router
 const router = routes;
 
 Vue.use(VueRouter);
+Vue.directive('currency', currency);
 
 Vue.config.productionTip = false
 
