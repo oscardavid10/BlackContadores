@@ -56,7 +56,6 @@ export default {
       vnode.context.$nextTick(() => {
         input.value = formatted;
       });
-      vnode.componentInstance.$emit("input", val);
     };
 
     input.addEventListener("input", onInput);
