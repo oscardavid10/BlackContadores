@@ -16,7 +16,7 @@ export default {
     const onInput = () => {
       const start = input.selectionStart
       const oldLength = input.value.length
-      const raw = input.value.rep let raw = input.value.replace(/,/g, '')
+	  let raw = input.value.replace(/,/g, '')
       if (raw.startsWith('.')) raw = `0${raw}`
       let newValue
       if (raw.endsWith('.')) {
