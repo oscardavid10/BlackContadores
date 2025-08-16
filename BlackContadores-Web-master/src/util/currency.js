@@ -16,18 +16,11 @@ const formatRaw = raw => {
   const endsWithDot = raw.endsWith('.')
   if (endsWithDot) raw = raw.slice(0, -1)
   const [intPart = '', decPart] = raw.split('.')
-  let formattedInt = ''
-  if (intPart || intPart === '0') {
-    const number = Number(intPart)
-    if (!isNaN(number)) {
-      formattedInt = number.toLocaleString('en-US')
-    }
-  }
+  const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   let result = decPart !== undefined ? `${formattedInt}.${decPart}` : formattedInt
   if (endsWithDot) result += '.'
   return result
 }
-
 
 export default {
   bind(el, binding, vnode) {
