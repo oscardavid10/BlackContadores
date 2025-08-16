@@ -12,15 +12,18 @@ const format = (value, fractionDigits) => {
 };
 
 const formatRaw = raw => {
-  if (raw.startsWith('.')) raw = `0${raw}`
-  const endsWithDot = raw.endsWith('.')
-  if (endsWithDot) raw = raw.slice(0, -1)
-  const [intPart = '', decPart] = raw.split('.')
-  const formattedInt = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  let result = decPart !== undefined ? `${formattedInt}.${decPart}` : formattedInt
-  if (endsWithDot) result += '.'
-  return result
-}
+  if (!raw) return "";
+  if (raw.startsWith('.')) raw = `0${raw}`;
+  const endsWithDot = raw.endsWith('.');
+  if (endsWithDot) raw = raw.slice(0, -1);
+  const [intPart = '', decPart] = raw.split('.');
+  // Elimina ceros a la izquierda, pero deja uno si es solo "0"
+  const cleanInt = intPart.replace(/^0+(?=\d)/, '');
+  const formattedInt = cleanInt.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  let result = decPart !== undefined ? `${formattedInt}.${decPart}` : formattedInt;
+  if (endsWithDot) result += '.';
+  return result;
+};
 
 export default {
   bind(el, binding, vnode) {
@@ -28,18 +31,23 @@ export default {
       el.tagName.toLowerCase() === "input" ? el : el.querySelector("input");
     if (!input) return;
 
-    const onInput = () => {
+ const onInput = () => {
       const start = input.selectionStart;
-      const oldLength = input.value.length;
-      let raw = input.value.replace(/,/g, "");
-      
-      const newValue = formatRaw(raw)
-      input.value = newValue
+      const oldValue = input.value;
+      let raw = oldValue.replace(/,/g, "");
+
+      const newValue = formatRaw(raw);
+      input.value = newValue;
 
       vnode.componentInstance.$emit("input", raw);
-      const newLength = input.value.length;
-      const diff = newLength - oldLength;
-      const newPos = start + diff;
+
+      // Ajuste de posición del cursor
+      let diff = newValue.length - oldValue.length;
+      let newPos = start + diff;
+      // Si el usuario está escribiendo justo después de una coma, ajusta el cursor
+      if (oldValue[start - 1] === ',' && diff > 0) {
+        newPos++;
+      }
       input.setSelectionRange(newPos, newPos);
     };
 
