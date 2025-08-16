@@ -18,8 +18,9 @@ const formatRaw = raw => {
   if (endsWithDot) raw = raw.slice(0, -1);
   const [intPart = '', decPart] = raw.split('.');
   // Elimina ceros a la izquierda, pero deja uno si es solo "0"
-  const cleanInt = intPart.replace(/^0+(?=\d)/, '');
-  const formattedInt = cleanInt.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const cleanInt = intPart.replace(/^0+(?=\d)/, '') || '0';
+  // Usa toLocaleString para asegurar el formato correcto
+  const formattedInt = Number(cleanInt).toLocaleString('en-US');
   let result = decPart !== undefined ? `${formattedInt}.${decPart}` : formattedInt;
   if (endsWithDot) result += '.';
   return result;
