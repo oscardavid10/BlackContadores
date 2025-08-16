@@ -13,7 +13,8 @@ const format = (value, fractionDigits) => {
 
 const formatRaw = raw => {
   if (raw.startsWith('.')) raw = `0${raw}`
-  if (raw.endsWith('.')) return raw
+  const endsWithDot = raw.endsWith('.')
+  if (endsWithDot) raw = raw.slice(0, -1)
   const [intPart = '', decPart] = raw.split('.')
   let formattedInt = ''
   if (intPart || intPart === '0') {
@@ -22,7 +23,9 @@ const formatRaw = raw => {
       formattedInt = number.toLocaleString('en-US')
     }
   }
-  return decPart !== undefined ? `${formattedInt}.${decPart}` : formattedInt
+  let result = decPart !== undefined ? `${formattedInt}.${decPart}` : formattedInt
+  if (endsWithDot) result += '.'
+  return result
 }
 
 
@@ -51,8 +54,7 @@ export default {
       const raw = input.value.replace(/,/g, "");
       if (raw === "") return;
       const val = Number(Number(raw).toFixed(2));
-      const formatted = format(val, 2);
-      vnode.componentInstance.$emit("input", val);
+      const formatted = format(val, 2);      
       vnode.context.$nextTick(() => {
         input.value = formatted;
       });
