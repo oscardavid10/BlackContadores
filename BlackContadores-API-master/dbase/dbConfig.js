@@ -1,6 +1,6 @@
 exports.dbconnection = function () {
   const connect = {
-    server: "localhost",
+    server: "sqlblack",
     database: "blackcontadores",
     user: "SA",
     password: "TuPassword123!",
