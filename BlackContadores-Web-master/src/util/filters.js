@@ -1,5 +1,6 @@
 import Vue from "vue";
 import moment from "moment";
+import { format } from "./currency";
 
 Vue.filter("formatoMoneda", (value) => {
   const formatted = format(value, 2);
