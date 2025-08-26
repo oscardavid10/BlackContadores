@@ -13,7 +13,7 @@ function sendEmailAccount(nombre, correo, nombreEmpresa, usuarioAcceso){
         }});
         
         var mailoptions =  {
-          from: 'Administración Black <administracion@contadoresblack.com>',
+          from: 'Black Administrativo <it@inspyra.mx>',
           to: correo,
           subject: 'Registro | Administración Black',
           html: '<span style="font-family: Helvetica;font-size: 14px">Buen día <b>' + nombre  + '</b></span>' + 
@@ -51,7 +51,7 @@ function sendEmailMembership(fechaVencimiento, tipoPlan, fechaActivacion, perioc
       }});
       
       var mailoptions =  {
-        from: 'Administración Black <administracion@contadoresblack.com>',
+        from: 'Black Administrativo <it@inspyra.mx>',
         to: correo,
         subject: 'Administración Black | Plan ' + tipoPlan + ' ',
         html: '<span style="font-family: Helvetica;font-size: 14px">Buen día <b>' + nombre  + '</b></span>' + 
@@ -81,15 +81,22 @@ function sendEmailMembership(fechaVencimiento, tipoPlan, fechaActivacion, perioc
 
 function sendEmailRecoveryPassword(nombre, correo, contrasena){
     
+   // Configuración para Microsoft 365 (Office 365)
   var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'administracion@contadoresblack.com',
-        pass: 'blackadmon.1234'
-      }});
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false,                // STARTTLS
+    auth: {
+      user: 'it@inspyra.mx',
+      pass: 'wtzshldswzqwvfsz'    // tu contraseña de aplicación
+    },
+    tls: {
+      ciphers: 'TLSv1.2'
+    }
+  });
       
       var mailoptions =  {
-        from: 'Administración Black <administracion@contadoresblack.com>',
+        from: 'Black Administrativo <it@inspyra.mx>',
         to: correo,
         subject: 'Recuperación de contraseña | Administración Black',
         html: '<span style="font-family: Helvetica;font-size: 14px">Buen día <b>' + nombre  + '</b></span>' + 
@@ -127,7 +134,7 @@ function sendEmailPayment(fechaVencimiento, tipoPlan, fechaActivacion, periocida
       }});
       
       var mailoptions =  {
-        from: 'Administración Black <administracion@contadoresblack.com>',
+        from: 'Black Administrativo <it@inspyra.mx>',
         to: correo,
         subject: 'Administración Black | Plan ' + tipoPlan + ' ',
         html: '<span style="font-family: Helvetica;font-size: 14px">Buen día <b>' + nombre  + '</b></span>' + 

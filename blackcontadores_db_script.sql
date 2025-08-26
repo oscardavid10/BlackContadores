@@ -3133,7 +3133,7 @@ SET IDENTITY_INSERT [dbo].[MtoCat_TipoMembresias] OFF
 GO
 SET IDENTITY_INSERT [dbo].[MtoCat_Usuarios] ON 
 GO
-INSERT [dbo].[MtoCat_Usuarios] ([UsuarioID], [EmpresaTransID], [EsActivo], [NombreUsuario], [CorreoUsuario], [Contrasena], [CreadoPor], [CreadoEl]) VALUES (19, 1702307804, 1, N'Allan Enrique Giovanni Galván Barba ', N'allan@maqallan.com', N'$2b$10$F0AeoDpi8aOZ8Rx18uF08ursS8Is3pkwEpduXFa2n.KeoHyL6l0X2', N'allan@maqallan.com', CAST(N'2023-05-17T12:39:11.067' AS DateTime))
+INSERT [dbo].[MtoCat_Usuarios] ([UsuarioID], [EmpresaTransID], [EsActivo], [NombreUsuario], [CorreoUsuario], [Contrasena], [CreadoPor], [CreadoEl]) VALUES (19, 1702307804, 1, N'Allan Enrique Giovanni Galván Barba ', N'david_010@live.com.mx', N'$2b$10$F0AeoDpi8aOZ8Rx18uF08ursS8Is3pkwEpduXFa2n.KeoHyL6l0X2', N'allan@maqallan.com', CAST(N'2023-05-17T12:39:11.067' AS DateTime))
 GO
 SET IDENTITY_INSERT [dbo].[MtoCat_Usuarios] OFF
 GO

@@ -1,15 +1,13 @@
 exports.dbconnection = function () {
   const connect = {
-    server: "sqlblack",
-    database: "blackcontadores",
+    server: "127.0.0.1", // o "localhost"
+    port: 1433,
     user: "SA",
     password: "TuPassword123!",
-    port: 1433,
-    setTimeout: 30000,
-
+    database: "blackcontadores",
     options: {
       encrypt: false,
-      trustedconnection: true,
+      trustServerCertificate: true,
     },
   };
 
